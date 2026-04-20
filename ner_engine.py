@@ -1,7 +1,7 @@
 import spacy
 
 class NEREngine:
-    # 1. Load the spaCy model at the class level so it only loads once
+    # Load the spaCy model
     try:
         nlp = spacy.load("en_core_web_sm")
     except OSError:
@@ -13,10 +13,10 @@ class NEREngine:
         if NEREngine.nlp is None:
             return [("Model not loaded.", None)]
         
-        # 2. Process the text through the spaCy model
+        # Process the text through the spaCy model
         doc = NEREngine.nlp(text)
         
-        # 3. Format the output specifically for Gradio's HighlightedText
+        # Format the output specifically for Gradio's HighlightedText
         formatted_output = []
         for token in doc:
             # If the token has an entity type (like ORG, PERSON, DATE), attach it
